@@ -16,7 +16,7 @@ class AppTheme {
   final int selectedColor;
 
   AppTheme({
-    this.selectedColor = 0,
+    required this.selectedColor,
   }) : assert(
           selectedColor >= 0 && selectedColor <= _colorThemes.length - 1,
           "Colors must be between 0 and ${_colorThemes.length}",
