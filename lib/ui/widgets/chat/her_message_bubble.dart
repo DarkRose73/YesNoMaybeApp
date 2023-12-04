@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_maybe_app/domain/entities/message.dart';
 
 class HerMessageBubble extends StatelessWidget {
-  const HerMessageBubble({super.key});
+  const HerMessageBubble({
+    super.key,
+    required this.message,
+  });
+
+  final Message message;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +21,14 @@ class HerMessageBubble extends StatelessWidget {
             color: colors.secondary,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: 20,
               vertical: 10,
             ),
             child: Text(
-              "Hola mundo",
-              style: TextStyle(
+              message.text,
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),
@@ -31,7 +37,9 @@ class HerMessageBubble extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        _ImageBubble(),
+        _ImageBubble(
+          url: message.imageUrl!,
+        ),
         const SizedBox(
           height: 10,
         ),
@@ -41,6 +49,12 @@ class HerMessageBubble extends StatelessWidget {
 }
 
 class _ImageBubble extends StatelessWidget {
+  const _ImageBubble({
+    required this.url,
+  });
+
+  final String url;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -48,7 +62,7 @@ class _ImageBubble extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Image.network(
-        "https://yesno.wtf/assets/yes/0-c44a7789d54cbdcad867fb7845ff03ae.gif",
+        url,
         width: size.width * 0.7,
         height: size.height * 0.2,
         fit: BoxFit.cover,
